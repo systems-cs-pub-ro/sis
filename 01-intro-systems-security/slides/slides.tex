@@ -9,7 +9,7 @@
 \title[Session 01]{Session 01}
 \subtitle{Introduction to Systems Security}
 \author{Security of Information Systems (SIS)}
-\date{October 5, 2017}
+\date{October 6, 2017}
 
 \begin{document}
 
@@ -136,7 +136,6 @@
   \begin{itemize}
     \item privacy
     \item safety
-    \item security
     \item anonimity
     \item integrity
     \item confidentiality
@@ -144,28 +143,68 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Trust}
+\begin{frame}{Security vs. Safety}
   \begin{itemize}
-    \item chain of trust
-    \item parties
+    \item safety is state
+    \item security is process
+    \item safety is outcome of a secure process/procedure
+    \item security: umbrella, safety: warm and not getting wet
   \end{itemize}
 \end{frame}
 
-\begin{frame}{AAAA}
+\begin{frame}{Trust}
   \begin{itemize}
-    \item TODO
+    \item validation among parties
+    \item chain of trust: bottom-up trust
+    \item trust anchor
+    \item certificate chain, digital signature, certification authority
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{A*}
+  \begin{itemize}
+    \item authentication: letting an entity be part of the system
+    \item authorization: providing privileges to a given entity (subject) for resources (object)
+    \item access control: checking whether subject can access object
+    \item audit: inspecting action history, validating behavior
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{A* commands}
+  \begin{itemize}
+    \item authentication: \texttt{login}
+    \item authorization: \texttt{chmod}
+    \item access control: \texttt{ls}
+    \item audit: \texttt{find}, \texttt{auditd}
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Least Privilege}
   \begin{itemize}
-    \item TODO
+    \item each subject is only provided the permissions it needs
+    \item if it's not mandatory, ditch it
+    \item sandboxing, isolation
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Privilege Separation}
+\begin{frame}{Privilege Separation/Escalation}
   \begin{itemize}
-    \item TODO
+    \item split privileges among entities
+    \item reduced actions for super user
+    \item may require escalation (i.e. one subject may get priviliges from another)
+      \begin{itemize}
+        \item be really careful about that
+        \item sudo, setuid, capabilities
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trusted Computing Base}
+  \begin{itemize}
+    \item security-critical parts of the computer system
+    \item bugs inside TCP compromise security
+    \item i.e. priviliged parts of the computer system
+    \item aim to reduce TCB
   \end{itemize}
 \end{frame}
 
