@@ -119,6 +119,38 @@
   \end{enumerate}
 \end{frame}
 
+\begin{frame}{Storyline}
+  \begin{itemize}
+    \item we have a system/infrastucture
+    \item one way to attack it is to crack or abuse authentication
+    \item assuming valid entry points (i.e. authentication) are secure, the attacker looks for security holes (i.e. vulnerabilities)
+    \item the attacker exploits vulnerabilities, we use defensive mechanisms, the attacker tries to bypass them
+    \item we assume attacks are unavoidable, we aim to confine them; we confine applications
+    \item since applications interact with other applications and system components, we isolate the system
+    \item proper isolation relies on separation and marking roles and validating the information flow
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Storyline (cont.)}
+  \begin{itemize}
+    \item ideally, our application or system will be secure by specification, design, implementation, validated offline
+    \item we use static analysis and dynamic analysis (including fuzzing and symbolic execution) to validate an application offline
+    \item a thorough approach is to use (semi)formal validation on application specifications and build it securely from those
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Prerequisites}
+  \begin{itemize}
+    \item good understanding of operating systems
+    \item good Unix/Linux command line abilities
+    \item good C programming skills
+    \item fair knowledge of C shell scripting
+    \item fair knowledge of Unix/Linux development tools
+    \item basic understanding networking
+    \item basic knowledge of computer architecture and assembly language
+  \end{itemize}
+\end{frame}
+
 
 \section{Systems Security Concepts}
 
@@ -213,7 +245,11 @@
 
 \begin{frame}{Attacker Mindset}
   \begin{itemize}
-    \item TODO
+    \item maximize profit
+    \item time is on your side
+    \item brute force may be an option
+    \item you don't care as long as it works
+    \item target many, get one
   \end{itemize}
 \end{frame}
 
@@ -227,13 +263,43 @@
 
 \begin{frame}{Threat/Adversarial Model}
   \begin{itemize}
-    \item TODO
+    \item decompose application, identify threats, determine coutermeasures
+    \item classify possible attacker actions and attacker flow
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Vulnerability}
+  \begin{itemize}
+    \item misconfiguration, weakness
+    \item exposes a risk that may be exploited for unintended outcome
+    \item i.e. buffer overflow, integer overflow, unsanitized input
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exploit}
+  \begin{itemize}
+    \item method to use a vulnerability for malicious outcome
+    \item take advantage
+    \item i.e. ret-to-libc, ROP, send injection code
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Attack Vector}
   \begin{itemize}
-    \item TODO
+    \item steps/path to deliver a malicious outcome
+    \item composed of attack steps (attack gadgets)
+    \item usually chaining together exploits towards outcome
+    \item i.e. SQL injection, actual real world attacks
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Attack Surface}
+  \begin{itemize}
+    \item parts of the system exposed to attacks
+    \item entry points into system
+    \item either valid entry points that may be used invalidly
+    \item or invalid entry points
+    \item goal is to reduce attack surface (think TCB)
   \end{itemize}
 \end{frame}
 
@@ -242,20 +308,30 @@
 
 \begin{frame}{Defender Mindset}
   \begin{itemize}
-    \item TODO
     \item malicious vs. negligence
+    \item time is limited
+    \item proactive before reactive
+    \item prevent
+    \item monitor
+    \item defense in depth
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Proactive vs. Reactive}
   \begin{itemize}
-    \item TODO
+    \item similar to medicine, treating disease
+    \item analyze threats beforehand
+    \item deploy mitigation solutions
+    \item react when sh*t happens
+    \item have solutions in place
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Defense in Depth}
   \begin{itemize}
-    \item TODO
+    \item multiple defense layers
+    \item redundancy in defense
+    \item assume one layer falls, others take its place
   \end{itemize}
 \end{frame}
 
@@ -270,31 +346,48 @@
 
 \begin{frame}{Harden}
   \begin{itemize}
-    \item TODO
+    \item analysis, enhancement
+    \item off-line
+    \item static, dynamic analysis
+    \item verification and validation
+    \item fuzzing, symbolic execution
+    \item remove, treat \textbf{vulnerabilities}
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Prevent}
   \begin{itemize}
-    \item TODO
+    \item make it difficult / impossibile for exploits to happen
+    \item on-line, during runtime
+    \item i.e. ASLR, DEP, stack guard, ASan
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Confine}
   \begin{itemize}
-    \item TODO
+    \item when sh*t happens, reduce damage
+    \item limit resources use, limit interface
+    \item as reduced privileges as possible
+    \item ideally customed (tailored) per app/system
+    \item sandboxing, virtualization, access control
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Treat}
   \begin{itemize}
-    \item TODO
+    \item if sh*t happens, solve it
+    \item remove threat, remove damaged resources
+    \item replace components
+    \item apply lessons learned
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Monitoring}
+\begin{frame}{Monitor}
   \begin{itemize}
-    \item TODO
+    \item know when sh*t happens ASAP
+    \item proper monitoring levels; otherwise you ignore it
+    \item monitor as much as you can
+    \item key for availability
   \end{itemize}
 \end{frame}
 
@@ -305,12 +398,28 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item TODO
+        \item systems security
+        \item Security of Information Systems
+        \item goals
+        \item safety
+        \item trust
+        \item trusted computing base
+        \item least privilege
+        \item threat model
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item TODO
+        \item vulnerability
+        \item exploit
+        \item attack vector
+        \item attack surface
+        \item defense in depth
+        \item harden
+        \item prevent
+        \item confine
+        \item treat
+        \item monitor
       \end{itemize}
     \end{column}
   \end{columns}
