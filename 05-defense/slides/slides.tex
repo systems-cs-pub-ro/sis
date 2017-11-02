@@ -88,18 +88,94 @@
 
 \section{Web Application Defense}
 
-\begin{frame}{TODO}
+\begin{frame}{General}
   \begin{itemize}
-    \item TODO
+    \item Secure configuration
+    \item Input sanitization
+    \item Trusted connection
+    \item No vulnerable dependencies
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Verification}
+  \begin{itemize}
+    \item Client side
+    \item Server side
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Connection}
+  \begin{itemize}
+    \item HTTPS, SSL/TLS
+    \item Certificate
+    \item Downgrade attacks
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Secure HTTP Headers}
+  \begin{itemize}
+    \item HTTP Strict Transport Security (HSTS)
+    \item X-Frame-Options
+    \item X-XSS-Protection
+    \item X-Content-Type-Options
+    \item Content-Security-Policy
+    \item Referrer-Policy
+    \item Expect-CT
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Database protection}
+  \begin{itemize}
+    \item SANITIZE queries
+    \item Encrypt data at rest
+    \item Encrypt data in transit
+    \item SANITIZE queries
   \end{itemize}
 \end{frame}
 
 
 \section{Operating System Defense}
 
-\begin{frame}{TODO}
+\begin{frame}{General System Defense}
   \begin{itemize}
-    \item TODO
+    \item Intrusion Detection System
+    \item Intrusion Prevention System
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Signing}
+  \begin{itemize}
+    \item Secure boot
+    \item Application signing
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Sandboxing}
+  \begin{itemize}
+    \item Mandatory Access Control
+      \begin{itemize}
+        \item SELinux
+        \item SMACK
+        \item AppArmor
+        \item TOMOYO
+      \end{itemize}
+    \item seccomp
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kernel Config}
+  \begin{itemize}
+    \item CONFIG_HARDENED_USERCOPY
+    \item CONFIG_FORTIFY_SOURCE
+    \item CONFIG_RANDOMIZE_BASE (KASLR)
+    \item CONFIG_KASAN
+    \item CONFIG_UBSAN
+    \item In development
+      \begin{itemize}
+        \item KTSAN
+        \item KMSAN
+      \end{itemize}
+    \item grsecurity
   \end{itemize}
 \end{frame}
 
@@ -127,9 +203,17 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}{Resources}
+  \begin{itemize}
+    \item \href{https://letsencrypt.org/}{Let's Encrypt}
+    \item \href{https://www.youtube.com/watch?v=MFol6IMbZ7Y}{Defeating SSL Using Sslstrip}
+    \item \href{https://www.owasp.org/index.php/OWASP_Secure_Headers_Project}{OWASP Secure Headers Project}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Nice to read}
   \begin{itemize}
-    \item TODO
+    \item 
   \end{itemize}
 \end{frame}
 
