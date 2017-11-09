@@ -29,25 +29,54 @@
 
 \begin{frame}{Attacker Perspective and Mindset}
   \begin{itemize}
-    \item TODO
+    \item find one vulnerability and build from that
+    \item look for something that is valuable
+    \item do reconnaisance, look for weak spots
+    \item create an attack chain
+    \item use every trick in the book
+    \item start from existing knowledge
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Defender Perspective and Mindset}
   \begin{itemize}
-    \item TODO
+    \item protect all entry points
+    \item users are vulnerable, as well as technology
+    \item use multiple defensive layers
+    \item monitor, be proactive
+    \item discipline, best practices are worth more than skills
+    \item invest more on valuable targets
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Attacker Pros/Cons}
   \begin{itemize}
-    \item TODO
+    \item apart from ethical hackers, security researchers, it's a shady business
+    \item you may not need skills, just a weak target and a database of attack vectors
+    \item you may get caught
+    \item you only need to find one spot
+    \item possible great gains
+    \item little time for fame (annonymous)
+    \item the Internet gives you tons of targets
+    \item but many targets give little more than fun
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Defender Pros/Cons}
+  \begin{itemize}
+    \item less resources (time) than an attacker
+    \item must think of everything
+    \item is being paid constructively
+    \item you have a purpose: keep the system running
+    \item it never ends
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Honeypots}
   \begin{itemize}
-    \item TODO
+    \item baits
+    \item a system appearing as vulnerable but closely monitored
+    \item deflect, change attention and collect attacker information
   \end{itemize}
 \end{frame}
 
@@ -55,61 +84,116 @@
 
 \begin{frame}{Evolution of Application Security}
   \begin{itemize}
-    \item TODO
+    \item buffer overflows
+    \item shellcodes
+    \item memory protection (DEP, W\^X)
+    \item memory randomization
+    \item canaries
+    \item code reuse
+    \item CFI (Control Flow Integrity)
+    \item memory safety, safe programming languages
+    \item static and dynamic analysis
+    \item hardware enhanced security
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Fine-grained ASLR}
   \begin{itemize}
-    \item TODO
+    \item issue with ASLR: memory disclosure / information leak
+    \item one address leaked renders all information
+    \item do it at page level
+    \item one leak may lead to other leaks that are chained together
+    \item \url{https://dl.acm.org/citation.cfm?id=2498135}
   \end{itemize}
 \end{frame}
 
 \begin{frame}{SafeStack}
   \begin{itemize}
-    \item TODO
+    \item \url{https://clang.llvm.org/docs/SafeStack.html}
+    \item part of the Code Pointer Integrity project: \url{http://dslab.epfl.ch/proj/cpi/}
+    \item moves sensitive information (such as return addresses) on a safe stack, leaving problematic ones on the unsafe stack
+    \item reduced overhead, protects against stack buffer overflows
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Address Sanitizer}
   \begin{itemize}
-    \item TODO
+    \item ASan
+    \item \url{https://research.google.com/pubs/archive/37752.pdf}
+    \item \url{https://github.com/google/sanitizers/}
+    \item instruments code
+    \item only useful in development
+    \item detects out-of-bounds bugs, memory leaks
   \end{itemize}
 \end{frame}
 
 \begin{frame}{CFI/CPI}
   \begin{itemize}
-    \item TODO
+    \item \url{https://dl.acm.org/citation.cfm?id=1102165}
+    \item \url{https://www.usenix.org/node/186160}
+    \item \url{http://dslab.epfl.ch/proj/cpi/}
+    \item coarse-grained CFI vs fine-grained CFI
+    \item Control Flow Integrity, Code Pointer Integrity
+    \item protect against control flow hijack attacks
+    \item CPI is weaker than CFI but more practical (reduced overhead)
+    \item CPI protects all code pointers, data based attacks may still happen
+    \item CPS (Code Pointer Separation) is a weaker yet more practical for of CPI
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Shellcodes}
   \begin{itemize}
-    \item TODO
+    \item difficult to inject due to DEP, small buffers and input validation
+    \item preliminary parts of the attack may remap memory region
+    \item shellcode may do stack pivoting and then load another shellcode
+    \item alphanumeric shellcodes: still need a binary address to bootstrap
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Code Reuse}
   \begin{itemize}
-    \item TODO
+    \item bypass DEP by using existing pieces of code
+    \item code gadgets
+    \item used in ROP (Return-Oriented Programming) and JOP (Jump-Oriented programming)
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Return-Oriented Programming}
   \begin{itemize}
-    \item TODO
+    \item gadgets ending in \texttt{ret}
+    \item may be chained together to form an attack
+    \item Turing-complete languge
+    \item \url{http://www.suse.de/~krahmer/no-nx.pdf}
+    \item \url{https://dl.acm.org/citation.cfm?id=2133377}
+    \item most common way of creating runtime attack vectors
+    \item JOP: \url{https://dl.acm.org/citation.cfm?id=1966919}
+      \begin{itemize}
+        \item gadgets end up in an indirect branch not a \texttt{ret}
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Anti-ROP Defense}
   \begin{itemize}
-    \item TODO
+    \item prevent atacks
+      \begin{itemize}
+        \item SafeStack
+        \item CFI/CPI, ASan
+        \item Microsoft CFG, RFG
+      \end{itemize}
+    \item detect attacks
+      \begin{itemize}
+        \item Microsoft EMET
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Data-Oriented Attacks}
   \begin{itemize}
-    \item TODO
+    \item \url{https://www.usenix.org/node/190963}
+    \item \url{https://huhong-nus.github.io/advanced-DOP/}
+    \item overwrites data, not code pointers
+    \item bypasses CFI
   \end{itemize}
 \end{frame}
 
@@ -258,7 +342,7 @@
 
 \begin{frame}{Nice to Read}
   \begin{itemize}
-    \item 
+    \item TODO
   \end{itemize}
 \end{frame}
 
