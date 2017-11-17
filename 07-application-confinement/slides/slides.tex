@@ -4,6 +4,8 @@
 %\usepackage{code/highlight}
 \usepackage{color}
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{multicol}
 %\usepackage{alltt}
 
 
@@ -16,24 +18,165 @@
 
 \frame{\titlepage}
 
-\section{Summary}
+\section{Sandboxing}
 
-\begin{frame}{TODO}
+\begin{frame}{Assets to protect}
   \begin{itemize}
-    \item TODO
+    \item File descriptors
+    \item File system space
+    \item Other processes 
+    \item Memory
+    \item Network
+    \item Everything else
   \end{itemize}
 \end{frame}
+
+\begin{frame}{Sandbox implementations}
+  \begin{itemize}
+    \item Capabilities
+    \item Jail
+    \item Rule based (MAC)
+    \item Java Virtual Machine
+    \item HTML5 iframe sandbox
+    \item .NET Code Access Security
+  \end{itemize}
+\end{frame}
+
+\section{Mandatory Access Control}
+
+\begin{frame}{Linux Security Modules}
+  \begin{itemize}
+    \item Framework in Linux kernel
+    \item Hooks for user-level system call
+    \item Introduced in Linux Kernel 2.6
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{MAC Terminology}
+  \begin{itemize}
+    \item Subject
+    \item Object
+    \item Permission
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{MAC Implementations}
+  \begin{itemize}
+    \item SELinux (2.6.0)
+    \item AppArmor (2.6.36)
+    \item Smack (2.6.25)
+    \item TOMOYO (2.6.30)
+    \item Yama (3.4)
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{SELinux}
+  \begin{itemize}
+    \item Inode based
+    \item Uses labels - user:role:type:mls
+    \item Policy based
+    \item Modes:
+      \begin{itemize}
+        \item Disabled
+        \item Permissive
+        \item Enforcing
+      \end{itemize}
+    \item Many other features:
+      \begin{itemize}
+        \item Role-Based Access Control (RBAC)
+        \item Multi-Level Security (MLS)
+        \item Multi-Category Security (MCS)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{AppArmor}
+  \begin{itemize}
+    \item Path based
+    \item Filesystem agnostic
+    \item Profile based
+    \item Hybrid modes
+    \begin{itemize}
+      \item Per object mode
+      \item Learning mode
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{SMACK}
+  \begin{itemize}
+    \item Inode based
+    \item Uses labels (most are kept in extended attribute - xattrs)
+    \item Policy based
+    \item Modes:
+    \begin{itemize}
+      \item Bringup
+    \end{itemize}
+    \item Access
+    \begin{itemize}
+      \item rwxa - same as DAC
+      \item t - transmutation
+      \item b - report in bringup mode
+    \end{itemize}
+    \item Custom labels: \_ \^ * ? @
+  \end{itemize}
+\end{frame}
+
+
+\section{Secure Computing Mode (Seccomp)}
+
+\begin{frame}{Seccomp}
+  \begin{itemize}
+    \item Minimize the exposed kernel surface
+    \item To be used by developers
+    \item Uses BPF
+    \item Requires support in kernel
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kernel Config}
+\begin{itemize}
+  \item CONFIG_HAVE_ARCH_SECCOMP_FILTER=y
+  \item CONFIG_SECCOMP_FILTER=y
+  \item CONFIG_SECCOMP=y
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Default allowed syscalls}
+  \begin{itemize}
+      \item read
+      \item write
+      \item exit
+      \item sigreturn
+  \end{itemize}
+\end{frame}
+
+\section{Seccomp Example}
+
+\section{Summary}
 
 \begin{frame}{Keywords}
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item TODO
+        \item Assets
+        \item Linux Security Module
+        \item Subject,Object,Permission
+        \item Capabilities
+        \item Profiles
+        
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item TODO
+        \item SELinux
+        \item AppArmor
+        \item SMACK
+        \item Seccomp
+        \item Syscall filtering
       \end{itemize}
     \end{column}
   \end{columns}
