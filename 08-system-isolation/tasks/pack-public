@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Use temporary folder to store archive files before packing.
+tmpdir=$(mktemp -d)
+
+# Pack challenge. Function argument is path to challenge folder.
+pack_challenge()
+{
+    session="$1"
+    if test -d public; then
+        echo "Packing public for $session ..."
+        cp -r public "$tmpdir"/"$session"
+        tar -C "$tmpdir" -cf "$session".tar "$session"
+    fi
+}
+
+pack_challenge "08-system-isolation"
+rm -fr "$tmpdir"
