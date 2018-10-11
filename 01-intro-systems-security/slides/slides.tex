@@ -9,7 +9,7 @@
 \title[Session 01]{Session 01}
 \subtitle{Introduction to Systems Security}
 \author{Security of Information Systems (SIS)}
-\date{October 6, 2017}
+\date{September 28, 2018}
 
 \begin{document}
 
@@ -20,77 +20,121 @@
 
 \begin{frame}{Systems Security}
   \begin{itemize}
-    \item IT security, cyber security, computer security
-    \item applications, operating system, infrastructure, networking
-    \item hardware, software, information
+    \pause \item IT security, cyber security, computer security
+    \pause \item applications, operating system, infrastructure, networking
+    \pause \item hardware, software, information
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Security of Information Systems}
   \begin{itemize}
-    \item focus on computer, operating system, software stack and infrastructure security
-    \item little focus on networking, crypto, hardware
-    \item research focus
+    \pause \item focus on computer, operating system, software stack and infrastructure security
+    \pause \item little focus on networking, crypto, hardware
+    \pause \item research focus
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Topics}
   \begin{itemize}
-    \item authentication, authorization
-    \item attack, mitigation, bypass
-    \item isolation, sandboxing
-    \item fuzzing, symbolic execution
-    \item defensive programming
-    \item software analysis, verification and validation
+    \pause \item authentication, authorization
+    \pause \item attack, mitigation, bypass
+    \pause \item isolation, sandboxing
+    \pause \item fuzzing, symbolic execution
+    \pause \item defensive programming
+    \pause \item software analysis, verification and validation
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Systems Security Research}
+  \begin{itemize}
+    \pause \item research: more on finding the right question, than the right answer
+    \pause \item not boring, but uncertain
+    \pause \item high risk, high impact
+    \pause \item secure build, attack, defend, repeat
+    \pause \item actual systems: software, hardware, infrastructure
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Systems Security Research Venues}
+  \begin{itemize}
+    \pause \item big four: IEEE S\&P (Oakland), ACM CCS, NDSS, Usenix Security Symposium
+    \pause \item ESORICS, RAID, ACSAC
+    \pause \item AsiaCCS, CNS, ACNS
+    \pause \item \url{http://faculty.cs.tamu.edu/guofei/sec_conf_stat.htm}
+    \pause \item \url{http://s3.eurecom.fr/~balzarot/notes/top4_v1/}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Research Results}
+  \begin{itemize}
+    \pause \item white papers: company product information
+    \pause \item workshops: preliminary work, networking
+    \pause \item conferences: complete work, novel results, networking
+    \pause \item journals: aggregated work, archive
+    \pause \item CVEs
+    \pause \item features in existing products
+    \pause \item start ups
+    \pause \item public / open source
+  \end{itemize}
+\end{frame}
 
 \section{Organization}
 
 \begin{frame}{Logistics}
   \begin{itemize}
-    \item common lecture + lab sessions
-    \item Friday, 8am-12pm, room PR 706
-    \item cs.curs.pub.ro instance
-    \item \url{http://elf.cs.pub.ro/sis/}: still trying to get the best of it
+    \item lecture: Friday, 10am-12pm, room PR706
+    \item labs: Friday, 8am-10am and 12pm-2pm, room PR706
+    \item first lab is Friday, September 28, 2018, 12pm-2pm and Friday, October 5, 8am-10am
+    \item \url{http://elf.cs.pub.ro/sis/}: all information
+    \item \url{https://sis-ctf.security.cs.pub.ro}: CTF assignments
+    \item acs.curs.pub.ro instance: discussions, annoucements
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Team}
   \begin{itemize}
-    \item Răzvan Deaconescu
+    \item Costin Carabaș
+    \item Radu Chișcariu
     \item Alexandru Cornea
-    \item Costin Raiciu
+    \item Răzvan Deaconescu
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Typical Session}
+\begin{frame}{Typical Lecture Session}
   \begin{itemize}
-    \item lecture + discussions
-    \item research insights, trends
-    \item lab/practical focused on problem solving, on approaches, not on tools
-    \item CTF-like activity in lab: have problem, find solution
-    \item need focus, patience and perseverence
+    \pause \item lecture + discussions
+    \pause \item research insights, trends
+    \pause \item demos, highlights
+    \pause \item DO ask questions, DO take part in discussion, DO challenge ideas, DO rebut ideas, DO open interesting topics (covering systems security)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Typical Lab Session}
+  \begin{itemize}
+    \pause \item lab/practical focused on problem solving, on approaches, not on tools
+    \pause \item CTF-like activity in lab: have problem, find solution
+    \pause \item challenge focused, not tutorial focused
+    \pause \item need focus, patience and perseverence
+    \pause \item we expect you to know the basics of: Linux/command line, network protocols and infrastructure, programming, assembly language, operating systems
   \end{itemize}
 \end{frame}
 
 \begin{frame}{CNS vs. SIS}
   \begin{itemize}
-    \item focus on offensive/exploiting vs. focus on defensive/mitigation
-    \item narrow, focused, practical vs. diverse, holistic, conceptual
-    \item binary/runtime application security vs. systems security
-    \item engineer-centric vs. research-centric
-    \item well-known steps vs. trends and models
-    \item skill vs. approach
+    \pause \item focus on offensive/exploiting vs focused on a building, attacking, defending
+    \pause \item narrow, focused, practical vs. diverse, holistic, conceptual
+    \pause \item binary/runtime application security vs. systems security
+    \pause \item engineer-centric vs. research-centric
+    \pause \item well-known steps vs. trends and models
+    \pause \item skill vs. approach
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Support Documentation}
   \begin{itemize}
-    \item still looking
+    \item still looking for proper documentation
     \item it's likely it will not be a book
-    \item likely 3-4 papers per session
+    \item likely 3-4 papers and/or chapters per session
   \end{itemize}
 \end{frame}
 
@@ -98,56 +142,66 @@
   \begin{itemize}
     \item 2p: lecture tests, once every two lectures (3, 5, 7, 9, 11)
     \item 2p: lab activity
+    \item 1p: lecture activity (DO take part in lectures)
     \item 3p: assignments/projects (bonuses included)
-    \item 3p: final exam (likely an open book exam, possibly an essay-like question)
+    \item 3p: final exam (2 essay-like questions out of 3 presented)
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Contents}
   \begin{enumerate}
-    \item Introduction to Systems Security
-    \item Authentication and Password Management
-    \item Attacks and Exploits
-    \item Mitigation Techniques
-    \item Defense Bypassing
-    \item Application Confinment
-    \item System Isolation
-    \item Information Flow Security
-    \item Static Analysis. Defensive Programming
-    \item Fuzzing. Symbolic Execution
-    \item Software Verification and Validation
+    \pause \item Introduction to Systems Security
+    \pause \item Authentication and Password Management
+    \pause \item Attacks and Exploits
+    \pause \item Mitigation Techniques
+    \pause \item Defense Bypassing
+    \pause \item Application Confinment
+    \pause \item System Isolation
+    \pause \item Information Flow Security
+    \pause \item Static Analysis. Defensive Programming
+    \pause \item Fuzzing. Symbolic Execution
+    \pause \item Software Verification and Validation
   \end{enumerate}
 \end{frame}
 
 \begin{frame}{Storyline}
   \begin{itemize}
-    \item we have a system/infrastucture
-    \item one way to attack it is to crack or abuse authentication
-    \item assuming valid entry points (i.e. authentication) are secure, the attacker looks for security holes (i.e. vulnerabilities)
-    \item the attacker exploits vulnerabilities, we use defensive mechanisms, the attacker tries to bypass them
-    \item we assume attacks are unavoidable, we aim to confine them; we confine applications
-    \item since applications interact with other applications and system components, we isolate the system
-    \item proper isolation relies on separation and marking roles and validating the information flow
+    \pause \item we have a system/infrastucture
+    \pause \item one way to attack it is to crack or abuse authentication
+    \pause \item assuming valid entry points (i.e. authentication) are secure, the attacker looks for security holes (i.e. vulnerabilities)
+    \pause \item the attacker exploits vulnerabilities, we use defensive mechanisms, the attacker tries to bypass them
+    \pause \item we assume attacks are unavoidable, we aim to confine them; we confine applications
+    \pause \item since applications interact with other applications and system components, we isolate the system
+    \pause \item proper isolation relies on separation and marking roles and validating the information flow
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Storyline (cont.)}
   \begin{itemize}
-    \item ideally, our application or system will be secure by specification, design, implementation, validated offline
-    \item we use static analysis and dynamic analysis (including fuzzing and symbolic execution) to validate an application offline
-    \item a thorough approach is to use (semi)formal validation on application specifications and build it securely from those
+    \pause \item ideally, our application or system will be secure by specification, design, implementation, validated offline
+    \pause \item we use static analysis and dynamic analysis (including fuzzing and symbolic execution) to validate an application offline
+    \pause \item a thorough approach is to use (semi)formal validation on application specifications and build it securely from those
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Prerequisites}
   \begin{itemize}
-    \item good understanding of operating systems
-    \item good Unix/Linux command line abilities
-    \item good C programming skills
-    \item fair knowledge of C shell scripting
-    \item fair knowledge of Unix/Linux development tools
-    \item basic understanding networking
-    \item basic knowledge of computer architecture and assembly language
+    \pause \item good understanding of operating systems
+    \pause \item good Unix/Linux command line abilities
+    \pause \item good C programming skills
+    \pause \item fair knowledge of C shell scripting
+    \pause \item fair knowledge of Unix/Linux development tools
+    \pause \item basic understanding networking
+    \pause \item basic knowledge of computer architecture and assembly language
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Covering Missing Know-How}
+  \begin{itemize}
+    \item Linux/command line: USO labs: \url{http://ocw.cs.pub.ro/courses/uso}
+    \item networking: RL labs: \url{http://ocw.cs.pub.ro/courses/rl}
+    \item assembly: \url{http://ocw.cs.pub.ro/courses/iocla}
+    \item operating systems: \url{http://ocw.cs.pub.ro/courses/so}
   \end{itemize}
 \end{frame}
 
