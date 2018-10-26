@@ -10,7 +10,7 @@
 \title[Session 05]{Session 05}
 \subtitle{Defense and Mitigation}
 \author{Security of Information Systems (SIS)}
-\date{November 3, 2017}
+\date{October 26, 2018}
 
 \begin{document}
 
@@ -59,11 +59,53 @@
   \end{itemize}
 \end{frame}
 
+
 \section{Defender Perspective}
 
-\begin{frame}{TODO}
+\begin{frame}{Time}
   \begin{itemize}
-    \item TODO
+    \item always on the attacker side
+    \item prevent attacks is better than handling attacks
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{System Components}
+  \begin{itemize}
+    \item protect everything
+    \item attacker need only find \textbf{one} flaw
+    \item defense in depth
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Prevention}
+  \begin{itemize}
+    \item preventive/proactive is better than reactive
+    \item harden system components
+    \item monitor everything
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Security vs Speed}
+  \begin{itemize}
+    \item any defense mechanism incurs overhead
+    \item use both offline (check at development time) and online mechanisms (check/harden during run-time)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Handling Complexity}
+  \begin{itemize}
+    \item automate processes
+    \item verification and validation
+    \item check before deployment
+    \item prioritize critical parts
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Monitoring}
+  \begin{itemize}
+    \item paranoia is a virtue
+    \item frequent updates
+    \item be on the lookout for CVEs
   \end{itemize}
 \end{frame}
 
@@ -79,12 +121,92 @@
 
 \section{Application Defense}
 
-\begin{frame}{TODO}
+\begin{frame}{Mindset}
+  \begin{itemize}
+    \item application is target of attacker
+    \item input minimization, input validation
+    \item you deploy an app that may have flaws or may be malware
+    \item memory disclosure attacks, application control
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Goal}
+  \begin{itemize}
+    \item prevent control flow hijacking
+    \item prevent memory/information disclosure
+    \item be on the look for policy flaws that may allow the app to leak information
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{CFI}
+  \begin{itemize}
+    \item Control Flow Integrity
+    \item make sure control flow graph is unchanged during run
+    \item high overhead
+    \item fine-grained vs coarse grained CFI
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Code Pointers}
+  \begin{itemize}
+    \item critical memory data
+    \item target for attacker for control flow hijacking
+    \item function return addresses, function pointers
+    \item Code Pointer Integrity (faster approache to CFI)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Prevent Vulnerabilities vs Prevent Exploiting vs Make Unlikely vs Confine}
+  \begin{itemize}
+    \item prevent vulnerabilities: secure coding, verification, fuzzing, symbolic execution, type safety, safe programming languages (later sessions)
+    \item prevent exploiting: ASan, StackGuard (canaries), SafeStack, CFI, input validation, DEP
+    \item make unlikely: ASLR, multiple heaps
+    \item confine: sandboxing, privacy settings, access control settings, SFI (Software Fault Isolation) (later sessions)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Stack Guard / Address Sanitizer}
   \begin{itemize}
     \item TODO
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Input Validation}
+  \begin{itemize}
+    \item TODO
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{CFI}
+  \begin{itemize}
+    \item monitor control graph
+    \item monitor calls, jumps, branches
+    \item aim to do it without incurring significant overhead
+    \item may happen offline
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{SafeStack}
+  \begin{itemize}
+    \item store code pointers in a separate stack
+    \item buffer overflows will not overflow code pointers
+    \item provide specific methods to access safe stack data
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{DEP}
+  \begin{itemize}
+    \item Data Execution Prevention
+    \item TODO
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{ASLR}
+  \begin{itemize}
+    \item Address Space Layout Randomization
+    \item TODO
+  \end{itemize}
+\end{frame}
 
 \section{Web Application Defense}
 
