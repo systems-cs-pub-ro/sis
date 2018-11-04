@@ -112,9 +112,68 @@
 
 \section{Generic Defensive Techniques}
 
-\begin{frame}{TODO}
+\begin{frame}{Defensive Steps}
   \begin{itemize}
-    \item TODO
+    \item prevent existence and prevent exploitation
+    \item during development
+    \item before deployment
+    \item during deployment: prevent, react, confine
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Prevent Existence}
+  \begin{itemize}
+    \item prevent existence of bugs and vulnerabilities
+    \item during development and before deployment
+    \item Secure Software Development
+    \item secure coding, defensive programming
+    \item code auditing, code linting
+    \item fuzzing, symbolic execution
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Prevent Exploitation}
+  \begin{itemize}
+    \item during deployment
+    \item if vulnerabilities exist, you cannot exploit them
+    \item either prevent or make it harder for the attacker
+    \item harden the application, the system
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Making Exploitation it Harder}
+  \begin{itemize}
+    \item randomize
+    \item obfuscate
+    \item break application into multiple apps
+    \item reduce number of inputs (attack surface)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Preventing Exploitation}
+  \begin{itemize}
+    \item make memory areas inaccessible
+    \item isolate components
+    \item harden executable with checker and sanitizers during runtime
+    \item disadvantage: incurs overhead
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Confine}
+  \begin{itemize}
+    \item more in session 7: Application Confinement
+    \item \textbf{when} the attack happens, reduce damage
+    \item sandboxing, permissions
+    \item treat application as potential malware
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{React}
+  \begin{itemize}
+    \item monitor applications, system
+    \item when attack happens, document, make app/system inaccessible
+    \item patch as soon as possible
+    \item investigate, prevent future similar attacks
   \end{itemize}
 \end{frame}
 
@@ -140,7 +199,7 @@
 
 \begin{frame}{CFI}
   \begin{itemize}
-    \item Control Flow Integrity
+    \item \textit{Control Flow Integrity}
     \item make sure control flow graph is unchanged during run
     \item high overhead
     \item fine-grained vs coarse grained CFI
@@ -152,7 +211,7 @@
     \item critical memory data
     \item target for attacker for control flow hijacking
     \item function return addresses, function pointers
-    \item Code Pointer Integrity (faster approache to CFI)
+    \item \textit{Code Pointer Integrity} (faster approache to CFI), next lecture
   \end{itemize}
 \end{frame}
 
@@ -161,19 +220,29 @@
     \item prevent vulnerabilities: secure coding, verification, fuzzing, symbolic execution, type safety, safe programming languages (later sessions)
     \item prevent exploiting: ASan, StackGuard (canaries), SafeStack, CFI, input validation, DEP
     \item make unlikely: ASLR, multiple heaps
-    \item confine: sandboxing, privacy settings, access control settings, SFI (Software Fault Isolation) (later sessions)
+    \item confine: sandboxing, privacy settings, access control settings, SFI (\textit{Software Fault Isolation}) (later sessions)
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Stack Guard / Address Sanitizer}
   \begin{itemize}
-    \item TODO
+    \item stack canary, stack protector
+    \item added at compile time
+    \item value (canary) placed between buffer and return address
+    \item overwriting canary is detected and ends the program
+    \item may leak canary and overwrite it with itself
+    \item may overwrite other data (without overwriting canary)
+    \item may overwrite stack guard exit handler
+    \item Google Address Sanitizer adds multiple checks, albeit at increased overhead
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Input Validation}
   \begin{itemize}
-    \item TODO
+    \item assume input is ``evil''
+    \item prevent injection: command injection, SQL injection, shellcode injection
+    \item prevent attacks such as billion laughs attacks
+    \item prevent certain patterns, parse input
   \end{itemize}
 \end{frame}
 
@@ -197,14 +266,20 @@
 \begin{frame}{DEP}
   \begin{itemize}
     \item Data Execution Prevention
-    \item TODO
+    \item mark writable memory area as non-executable
+    \item you cannot write and execute, i.e. inject code
+    \item data, heap, stack are marked with DEP
+    \item may be bypassed by using a \texttt{mprotect()}-like call to update memory area permissions
   \end{itemize}
 \end{frame}
 
 \begin{frame}{ASLR}
   \begin{itemize}
     \item Address Space Layout Randomization
-    \item TODO
+    \item new memory sections (especially libraries) are loaded at random addresses
+    \item makes it difficult to find addresses
+    \item not that effective on i386; useful on x86\_64
+    \item may be bypassed by information leaking
   \end{itemize}
 \end{frame}
 
@@ -212,25 +287,25 @@
 
 \begin{frame}{General}
   \begin{itemize}
-    \item Secure configuration
-    \item Input sanitization
-    \item Trusted connection
-    \item No vulnerable dependencies
+    \item secure configuration
+    \item input sanitization
+    \item trusted connection
+    \item no vulnerable dependencies
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Verification}
   \begin{itemize}
-    \item Client side
-    \item Server side
+    \item client side
+    \item server side
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Connection}
   \begin{itemize}
     \item HTTPS, SSL/TLS
-    \item Certificate
-    \item Downgrade attacks
+    \item certificate
+    \item downgrade attacks
   \end{itemize}
 \end{frame}
 
@@ -248,10 +323,10 @@
 
 \begin{frame}{Database protection}
   \begin{itemize}
-    \item SANITIZE queries
-    \item Encrypt data at rest
-    \item Encrypt data in transit
-    \item SANITIZE queries
+    \item \textbf{sanitize} queries
+    \item encrypt data at rest
+    \item encrypt data in transit
+    \item \textbf{sanitize} queries
   \end{itemize}
 \end{frame}
 
@@ -267,8 +342,8 @@
 
 \begin{frame}{Signing}
   \begin{itemize}
-    \item Secure boot
-    \item Application signing
+    \item secure boot
+    \item application signing
   \end{itemize}
 \end{frame}
 
@@ -304,9 +379,12 @@
 
 \section{Summary}
 
-\begin{frame}{TODO}
+\begin{frame}{Defensive Mechanisms}
   \begin{itemize}
-    \item TODO
+    \item prevent existence, prevent exploitation
+    \item development, before deployment, during deployment
+    \item input is the root of all evil
+    \item look out for control flow hijacks, information leaks, malformed input
   \end{itemize}
 \end{frame}
 
@@ -314,12 +392,25 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item TODO
+        \item vulnerability
+        \item exploit
+        \item attack vector
+        \item prevention
+        \item isolation
+        \item CFI
+        \item code pointer
+        \item Stack Guard
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item TODO
+        \item DEP
+        \item ASLR
+        \item Address Sanitizer
+        \item downgrade attacks
+        \item secure HTTP headers
+        \item sandboxing
+        \item Mandatory Access Control
       \end{itemize}
     \end{column}
   \end{columns}
@@ -330,12 +421,6 @@
     \item \href{https://letsencrypt.org/}{Let's Encrypt}
     \item \href{https://www.youtube.com/watch?v=MFol6IMbZ7Y}{Defeating SSL Using Sslstrip}
     \item \href{https://www.owasp.org/index.php/OWASP_Secure_Headers_Project}{OWASP Secure Headers Project}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Nice to read}
-  \begin{itemize}
-    \item 
   \end{itemize}
 \end{frame}
 
