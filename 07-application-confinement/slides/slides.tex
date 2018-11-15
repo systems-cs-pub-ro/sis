@@ -12,51 +12,94 @@
 \title[Session 07]{Session 07}
 \subtitle{Application Confinement}
 \author{Security of Information Systems (SIS)}
-\date{November 17, 2017}
+\date{November 9, 2018}
 
 \begin{document}
 
 \frame{\titlepage}
 
-\section{Sandboxing}
-
-\begin{frame}{Assets to protect}
+\begin{frame}{Story So Far}
   \begin{itemize}
-    \item File descriptors
-    \item File system space
-    \item Other processes 
-    \item Memory
-    \item Network
-    \item Everything else
+    \pause \item systems and system components have an attack surface
+    \pause \item flaws in systems and system components may be exploited
+    \pause \item input may be used maliciously
+    \pause \item prevent existance and prevent exploitation of vulnerabilities
+    \pause \item defender needs to limit damage
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Sandbox implementations}
+\begin{frame}{Limiting Damage}
   \begin{itemize}
-    \item Capabilities
-    \item Jail
-    \item Rule based (MAC)
-    \item Java Virtual Machine
-    \item HTML5 iframe sandbox
-    \item .NET Code Access Security
+    \pause \item isolate entire system, e.g. virtualization
+    \pause \item isolate/confine system component (application), e.g. sandboxing
+    \pause \item limit possible actions, limit accessible resources, e.g. prevent an app from using the network, prevent an app from reading data from other apps
   \end{itemize}
 \end{frame}
 
-\section{Mandatory Access Control}
+\begin{frame}{Application Confinement}
+  \begin{itemize}
+    \pause \item What can an application do? What can an application access?
+    \pause \item access control: subject, object
+    \pause \item typically enforced at kernel level
+    \pause \item What if it were enforced by a library at application level?
+    \pause \item overhead
+    \pause \item filesystem: users, file permissions, access control lists
+    \pause \item configurable permissions: Android permissions, iOS Privacy Settings, Linux capabilities
+    \pause \item sandboxing: jailing (filesystem), application sandboxing (kernel-enforced rules)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Remember: Malware}
+  \begin{itemize}
+    \pause \item application deployed on user device/workstation
+    \pause \item may abuse resource use and access
+    \pause \item doesn't require a vulnerability in an app, only a defect in the configuration or system
+    \pause \item confining it reduces damage
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Filesystem Access Control}
+  \begin{itemize}
+    \pause \item subject: process (UID)
+    \pause \item object: file (UID, GID)
+    \pause \item permissions or access control lists (attached to a file)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Android Permissions}
+  \begin{itemize}
+    \pause \item requests permissions at runtime
+    \pause \item permission approval
+    \pause \item enforcement at Android SDK level
+    \pause \item signed permissions
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{iOS Privacy Settings}
+  \begin{itemize}
+    \item database mappping between app and resource/service
+    \item \texttt{Preferences} app writes to database
+    \item may be turned on/off
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Linux Capabilities}
+  \begin{itemize}
+    \item security tokens providing privileges
+    \item attached to a given process
+    \item allow different permissions for processes belonging to the same user
+    \item may also be attached to an executable (similar to the setuid bit)
+  \end{itemize}
+\end{frame}
+
+
+\section{Confinement and Enforcement in the Linux Kernel}
 
 \begin{frame}{Linux Security Modules}
   \begin{itemize}
-    \item Framework in Linux kernel
-    \item Hooks for user-level system call
-    \item Introduced in Linux Kernel 2.6
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{MAC Terminology}
-  \begin{itemize}
-    \item Subject
-    \item Object
-    \item Permission
+    \item framework in Linux kernel
+    \item hooks for user-level system call
+    \item introduced in Linux kernel 2.6
   \end{itemize}
 \end{frame}
 
@@ -70,19 +113,18 @@
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}{SELinux}
   \begin{itemize}
-    \item Inode based
-    \item Uses labels - user:role:type:mls
-    \item Policy based
-    \item Modes:
+    \item inode based
+    \item uses labels - user:role:type:mls
+    \item policy based
+    \item modes
       \begin{itemize}
-        \item Disabled
-        \item Permissive
-        \item Enforcing
+        \item disabled
+        \item permissive
+        \item enforcing
       \end{itemize}
-    \item Many other features:
+    \item other features
       \begin{itemize}
         \item Role-Based Access Control (RBAC)
         \item Multi-Level Security (MLS)
@@ -91,49 +133,73 @@
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}{AppArmor}
   \begin{itemize}
-    \item Path based
-    \item Filesystem agnostic
-    \item Profile based
-    \item Hybrid modes
-    \begin{itemize}
-      \item Per object mode
-      \item Learning mode
-    \end{itemize}
+    \item path based
+    \item filesystem agnostic
+    \item profile based
+    \item hybrid modes
+      \begin{itemize}
+        \item per object mode
+        \item learning mode
+      \end{itemize}
   \end{itemize}
 \end{frame}
-
 
 \begin{frame}{SMACK}
   \begin{itemize}
-    \item Inode based
-    \item Uses labels (most are kept in extended attribute - xattrs)
-    \item Policy based
-    \item Modes:
-    \begin{itemize}
-      \item Bringup
-    \end{itemize}
-    \item Access
-    \begin{itemize}
-      \item rwxa - same as DAC
-      \item t - transmutation
-      \item b - report in bringup mode
-    \end{itemize}
-    \item Custom labels: \_ \^ * ? @
+    \item inode based
+    \item uses labels (most are kept in extended attribute -- \texttt{xattrs})
+    \item policy based
+    \item access
+      \begin{itemize}
+        \item rwxa - same as DAC
+        \item t - transmutation
+        \item b - report in bringup mode
+      \end{itemize}
+    \item custom labels: \_ \^ * ? @
   \end{itemize}
 \end{frame}
 
 
-\section{Secure Computing Mode (Seccomp)}
+\section{Sandboxing}
 
-\begin{frame}{Seccomp}
+\begin{frame}{Assets to Protect}
   \begin{itemize}
-    \item Minimize the exposed kernel surface
-    \item To be used by developers
-    \item Uses BPF
-    \item Requires support in kernel
+    \item file descriptors
+    \item file system space
+    \item other processes
+    \item memory
+    \item network
+    \item everything else
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Sandbox Implementations}
+  \begin{itemize}
+    \item capabilities
+    \item jail
+    \item rule based (MAC)
+    \item Java Virtual Machine
+    \item HTML5 iframe sandbox
+    \item .NET Code Access Security
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Breaking Sandboxing}
+  \begin{itemize}
+    \pause \item faulty sandbox rules
+    \pause \item other faulty configuration
+    \pause \item kernel vulnerability
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Linux Seccomp}
+  \begin{itemize}
+    \item minimize the exposed kernel surface
+    \item to be used by developers
+    \item uses BPF (\textit{Berkeley Packet Filtering})
+    \item requires support in kernel
   \end{itemize}
 \end{frame}
 
@@ -145,7 +211,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Default allowed syscalls}
+\begin{frame}{Default Allowed Syscalls}
   \begin{itemize}
       \item read
       \item write
@@ -154,7 +220,50 @@
   \end{itemize}
 \end{frame}
 
-\section{Seccomp Example}
+%\begin{frame}{Seccomp Example}
+%  \begin{itemize}
+%    \item povestea cu limbile
+%  \end{itemize}
+%\end{frame}
+
+
+\begin{frame}{Android Application Sandbox}
+  \begin{itemize}
+    \pause \item \textit{The sandbox is simple, auditable, and based on decades-old UNIX-style user separation of processes and file permissions.}
+    \pause \item SELinux-based
+    \pause \item uses application UID to map sandbox to application
+  \end{itemize}
+\end{frame}
+
+\section{Apple Application Sandbox}
+
+\begin{frame}{Sandbox Profiles}
+  \begin{itemize}
+    \pause \item set of rules
+    \pause \item sandbox operations, sandbox filters
+    \pause \item provided as binary blobs in the kernel image
+    \pause \item attached to an application
+    \pause \item some apps may use the same sandbox profile
+    \pause \item some system services use no sandbox profile
+    \pause \item entitlement-checks and sandbox extensions for differentiation between apps using same sandbox profile
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{container Sandbox Profile}
+  \begin{itemize}
+    \pause \item default sandbox profiles for \textbf{all} 3rd party apps
+    \pause \item biggest sandbox profile
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{SandScout}
+  \begin{itemize}
+    \pause \item \url{https://dl.acm.org/citation.cfm?id=2978336}
+    \pause \item SandScout: Automatic Detection of Flaws in iOS Sandbox Profiles
+    \pause \item systematic analysis of container sandbox profiles
+    \pause \item found flaws: application collusion, device abuse, control bypass
+  \end{itemize}
+\end{frame}
 
 \section{Summary}
 
@@ -162,38 +271,37 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item Assets
+        \item access control
         \item Linux Security Module
-        \item Subject,Object,Permission
-        \item Capabilities
-        \item Profiles
-        
+        \item subject, object, permission
+        \item capabilities
+        \item profiles
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item SELinux
-        \item AppArmor
-        \item SMACK
-        \item Seccomp
-        \item Syscall filtering
+        \item MAC
+        \item SELinux, AppArmor, SMACK
+        \item seccomp
+        \item iOS sandboxing
+        \item privacy settings
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Resources}
-  \begin{itemize}
-    \item \href{https://link.url.com/}{Link Name}
-    \item TODO
-    \item TODO
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Nice to Read}
-  \begin{itemize}
-    \item TODO
-  \end{itemize}
-\end{frame}
+%\begin{frame}{Resources}
+%  \begin{itemize}
+%    \item \href{https://link.url.com/}{Link Name}
+%    \item TODO
+%    \item TODO
+%  \end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Nice to Read}
+%  \begin{itemize}
+%    \item TODO
+%  \end{itemize}
+%\end{frame}
 
 \end{document}
