@@ -12,7 +12,7 @@
 \title[Session 08]{Session 08}
 \subtitle{System Isolation}
 \author{Security of Information Systems (SIS)}
-\date{November 24, 2017}
+\date{November 16, 2017}
 
 \begin{document}
 
@@ -36,6 +36,15 @@
     \item virtual machine: isolate OSes in a single machine
     \item process: sandboxing, jailing
     \item application: software fault isolation
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Software Fault Isolation}
+  \begin{itemize}
+    \item isolate components in their \textit{fault domain}
+    \item part of the same address space
+    \item requires some OS/hardware support to separate addresses
+    \item Mogoșanu et al.: MicroStache: A Lightweight Execution Context for In-Process Safe Region Isolation
   \end{itemize}
 \end{frame}
 
