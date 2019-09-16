@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat ../passwords.hash | python dictionary_breaking.py | python hybrid_breaking.py | python extended_breaking.py | python salt_breaking.py | python extended_salt_breaking.py | python brute_force_breaking.py
