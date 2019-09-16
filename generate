@@ -39,7 +39,7 @@ for task in "$session"/*; do
     if test ! -d "$task"; then
         continue
     fi
-    rm "$task"/.config
+    rm -f "$task"/.config
     config="$tpl_session_path"/"$(basename "$task")"/.config
     find "$task" -type f | while IFS=$'\n' read f; do
         echo "file: $f, config: $config"
