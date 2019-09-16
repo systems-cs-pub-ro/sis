@@ -1,0 +1,57 @@
+#!/bin/bash
+
+if test $# -ne 1; then
+    echo "Usage: $0 <session-name>" 1>&2
+    echo
+    echo "Available sessions:"
+    IFS=$'\n'
+    for f in templates/*; do
+        echo -e "    - $(basename "$f")"
+    done
+    exit 1
+fi
+
+session="$1"
+tpl_session_path=templates/"$1"
+
+if test ! -d "$tpl_session_path"; then
+    echo "No such session: $session" 1>&2
+    exit 1
+fi
+
+# Cleanup session folder if it exists.
+if test -d "$session"; then
+    echo -en "Session folder ($session) already exists. It will be erased and recreated. Do you want to continue? [y/N] "
+    read answer
+    if test ! "$answer" == "y"; then
+        exit 0
+    fi
+    rm -fr "$session"
+fi
+mkdir "$session"
+
+# Copy everything except for config file.
+cp -r "$tpl_session_path"/* "$session"
+
+# Generate actual files by replacing template statements using sed.
+IFS=$'\n'
+for task in "$session"/*; do
+    if test ! -d "$task"; then
+        continue
+    fi
+    rm "$task"/.config
+    config="$tpl_session_path"/"$(basename "$task")"/.config
+    find "$task" -type f | while IFS=$'\n' read f; do
+        echo "file: $f, config: $config"
+        if test -f "$config"; then
+            cat "$config" | while IFS=$'\n' read line; do
+                key=$(sed 's/^\([^= \t]\+\)[ \t]*=.*$/\1/' <<< "$line")
+                value=$(sed 's/^[^=]*[ ]*=\([^ \t]\+\).*$/\1/' <<< "$line")
+                key=${key//\//\\/}
+                value=${value//\//\\/}
+                #echo "key: $key, value: $value"
+                sed -i "s/$key/$value/g" "$f"
+            done
+        fi
+    done
+done

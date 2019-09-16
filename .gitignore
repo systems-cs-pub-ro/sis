@@ -1,0 +1,6 @@
+*
+!.gitignore
+!README.md
+!templates/
+!templates/**
+!generate
