@@ -10,37 +10,46 @@
 \title[Session 02]{Session 02}
 \subtitle{Authentication}
 \author{Security of Information Systems (SIS)}
-\date{October 5, 2018}
+\date{October 4, 2019}
 
 \begin{document}
 
 \frame{\titlepage}
 
 
+\begin{frame}{Access Control Terms}
+  \begin{itemize}
+    \item authentication
+    \item authorization
+    \item access control
+  \end{itemize}
+\end{frame}
+
 \section{Authentication}
 
 \begin{frame}{Model}
   \begin{itemize}
-    \item Actor
-    \item Role
-    \item Database
+    \item actor / subject / agent
+    \item credentials database (role, permissions, access control list)
+    \item resource / object
+    \item reference monitor
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Credentials}
   \begin{itemize}
-    \item Who you are
-    \item What you have
-    \item What you know
+    \item who you are
+    \item what you have
+    \item what you know
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Credential types}
+\begin{frame}{Credential Types}
   \begin{itemize}
-    \item Biometric
-    \item Hardware tokens
-    \item Software tokens
-    \item Secret (Password)
+    \item biometric
+    \item hardware tokens
+    \item software tokens
+    \item secret (password)
   \end{itemize}
 \end{frame}
 
@@ -49,31 +58,32 @@
 
 \begin{frame}{Biometrics}
   \begin{itemize}
-    \item Fingerprint
-    \item Face
-    \item Iris
-    \item Voice
-    \item Keystroke dynamics
+    \item fingerprint
+    \item face
+    \item iris
+    \item voice
+    \item keystroke dynamics
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Hardware tokens}
+\begin{frame}{Hardware Tokens}
   \begin{itemize}
-      \item Access card
-      \item Hardware keys
-      \item OneTimePassword
+      \item access card
+      \item hardware keys
+      \item one-time password (OTP)
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Software tokens}
+\begin{frame}{Software Tokens}
   \begin{itemize}
-    \item Certificate
-    \item Kerberos ticket
-    \item Cookie
+    \item certificate
+    \item kerberos ticket
+    \item cookie
   \end{itemize}
 \end{frame}
 
-\section {Passwords}
+
+\section {Password-based Access}
 
 \begin{frame}{Passwords}
   \begin{itemize}
@@ -103,58 +113,60 @@
 
 \begin{frame}{Passwords vs. Passphrases}
   \begin{itemize}
-    \item A password is a word and a passphrase is a set of words
-    \item Passphrases usually has spaces
-    \item Passphrases are recommended due to their increased length and being
-      easier to remember
+    \item a password is a word and a passphrase is a set of words
+    \item passphrases usually has spaces
+    \item passphrases are recommended due to their increased length and being easier to remember
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Attacker}
   \begin{itemize}
-    \item Online attack
+    \item online attack
       \begin{itemize}
         \item ``live'' attack
         \item run client/application, feed passwords and try to match
       \end{itemize}
-    \item Offline attack
+    \item offline attack
   \end{itemize}
 \end{frame}
-
-\section {Scenario 1}
 
 \begin{frame}{Scenario 1: Plaintext}
   \begin{itemize}
-    \item Attacker \begin{itemize}
-      \item Gain access to database
-      \item Profit!
-    \end{itemize}
-    \item Defender \begin{itemize}
-      \item Database ACL
-      \item One way function
-    \end{itemize}
+    \item attacker
+      \begin{itemize}
+        \item gain access to database
+        \item profit!
+      \end{itemize}
+    \item defender
+      \begin{itemize}
+        \item database access control
+        \item one-way function
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Cryptographic hash function}
+
+\section{Securing Password-based Access}
+
+\begin{frame}{Cryptographic Hash Functions}
   \begin{itemize}
-    \item Deterministic
-    \item Uniformity
-    \item Infeasible to reverse
-    \item Highly dynamic
-    \item Usually very fast
+    \item deterministic
+    \item uniformity
+    \item infeasible to reverse
+    \item highly dynamic
+    \item usually very fast
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Hash security properties}
+\begin{frame}{Hash Security Properties}
   \begin{itemize}
-    \item Pre-image resistance
-    \item Second pre-image resistance
-    \item Collision resistance
+    \item pre-image resistance
+    \item second pre-image resistance
+    \item collision resistance
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Hash algorithms}
+\begin{frame}{Hash Algorithms}
   \begin{itemize}
     \item \color{red}SHA1
     \item \color{red}MD2, MD4, MD5
@@ -164,25 +176,24 @@
   \end{itemize}
 \end{frame}
 
-\section {Scenario 2}
-
-\begin{frame}{Scenario 2: Hashed password}
+\begin{frame}{Scenario 2: Hashed Password}
   \begin{itemize}
-    \item Attacker \begin{itemize}
-      \item Rainbow tables
-      \item Profit!
-    \end{itemize}
-    \item Defender \begin{itemize}
-      \item Salt
-    \end{itemize}
+    \item attacker
+      \begin{itemize}
+        \item rainbow tables
+        \item profit!
+      \end{itemize}
+    \item defender
+      \begin{itemize}
+        \item salt
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}{Rainbow Tables}
   \begin{itemize}
-    \item Database of hashes
-    \item Space vs time
+    \item database of hashes
+    \item space vs time
   \end{itemize}
 \end{frame}
 
@@ -202,20 +213,18 @@
   \end{itemize}
 \end{frame}
 
-\section {Scenario 3}
-
 \begin{frame}{Scenario 3: Salted hashes}
   \begin{itemize}
-    \item Attacker
+    \item attacker
       \begin{itemize}
-        \item Dictionary/hybrid attack
-        \item Brute force attack
-        \item Side channel attacks
-        \item Profit ?!?
+        \item dictionary / hybrid attack
+        \item brute-force attack
+        \item side-channel attacks
+        \item profit ?!?
       \end{itemize}
-    \item Defender \begin{itemize}
-      \item Policies
-      \item Defensive programming
+    \item defender \begin{itemize}
+      \item policies
+      \item defensive programming
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -229,20 +238,18 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Password Dictionaries/Word Lists}
+\begin{frame}{Password Dictionaries / Word Lists}
   \begin{itemize}
     \item \url{http://wiki.skullsecurity.org/Passwords}
-    \item
-      \url{https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm}
-    \item
-      \url{http://security.stackexchange.com/questions/9567/modern-high-quality-password-dictionary}
+    \item \url{https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm}
+    \item \url{http://security.stackexchange.com/questions/9567/modern-high-quality-password-dictionary}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Hybrid attack}
+\begin{frame}{Hybrid Attack}
   \begin{itemize}
-    \item Use a dictionary
-    \item Apply mutations for each word
+    \item use a dictionary
+    \item apply mutations for each word
       \begin{itemize}
        \item combine dictionary words
         \item change i to 1, s to 5, e to 3
@@ -250,42 +257,42 @@
         \item add 123 at the end of the word
         \item add ! at the end of the word
       \end{itemize}
-    \item Hash and check with password hash
+    \item hash and check with password hash
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Policy}
   \begin{itemize}
-    \item Complexity
+    \item complexity
       \begin{itemize}
-        \item Password length
-        \item Charset
+        \item password length
+        \item charset
       \end{itemize}
-    \item Password expiration
-    \item Password reuse
+    \item password expiration
+    \item password reuse
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Policy issues}
+\begin{frame}{Policy Issues}
   \begin{itemize}
-    \item Password security paradox
+    \item password security paradox
       \begin{itemize}
-        \item Easy to remember
-        \item Hard to guess
+        \item easy to remember
+        \item hard to guess
       \end{itemize}
-    \item User behavior
-    \item Solution: Password managers
+    \item user behavior
+    \item solution: password managers
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Side channel attacks}
+\begin{frame}{Side-Channel Attacks}
   \begin{itemize}
-    \item Timing information
-    \item Performance / power consumption 
-    \item Electromagnetic leak
-    \item Acoustic information
-    \item Social engineering
-    \item Rubber-hose technique
+    \item timing information
+    \item performance / power consumption 
+    \item electromagnetic leak
+    \item acoustic information
+    \item social engineering
+    \item rubber-hose technique
   \end{itemize}
 \end{frame}
 
@@ -302,11 +309,11 @@
 
 \begin{frame}{Recommendations}
   \begin{itemize}
-    \item Do not use unsafe hashing algorithms!!!
-    \item Passphrase $>$ complex password
-    \item Use/allow password managers
-    \item Use 2FA/3FA
-    \item Secure side channels
+    \item do not use unsafe hashing algorithms!!!
+    \item passphrase $>$ complex password
+    \item use / allow password managers
+    \item use 2FA / 3FA
+    \item secure side channels
   \end{itemize}
 \end{frame}
 
@@ -322,28 +329,28 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item Credentials
-        \item Password
-        \item Passphrase
-        \item Hash functions
-        \item Rainbow tables
-        \item Salt
-        \item Dictionary attack
-        \item Side channel attack
-        \item Policies
+        \item credentials
+        \item password
+        \item passphrase
+        \item hash functions
+        \item rainbow tables
+        \item salt
+        \item dictionary attack
+        \item side-channel attack
+        \item policies
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item Social engineering
-        \item Shoulder surfing
-        \item One time password
-        \item Password complexity
-        \item Password manager
-        \item 2/3 Factor authentication
-        \item SHA256,SHA512
-        \item SHA3
-        \item Rubber hose technique
+        \item social engineering
+        \item shoulder surfing
+        \item one-time password
+        \item password complexity
+        \item password manager
+        \item 2/3 factor authentication
+        \item SHA256, SHA512
+        \item sHA3
+        \item rubber-hose technique
       \end{itemize}
     \end{column}
   \end{columns}
