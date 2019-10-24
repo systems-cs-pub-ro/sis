@@ -46,7 +46,7 @@ for task in "$session"/*; do
         if test -f "$config"; then
             cat "$config" | while IFS=$'\n' read line; do
                 key=$(sed 's/^\([^= \t]\+\)[ \t]*=.*$/\1/' <<< "$line")
-                value=$(sed 's/^[^=]*[ ]*=\([^ \t]\+\).*$/\1/' <<< "$line")
+                value=$(sed 's/^[^=]\+=[ \t]*\(.*\)$/\1/' <<< "$line")
                 key=${key//\//\\/}
                 value=${value//\//\\/}
                 #echo "key: $key, value: $value"
