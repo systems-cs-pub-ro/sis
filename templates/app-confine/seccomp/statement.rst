@@ -1,4 +1,4 @@
-Now we want to use sandboxing (``seccomp```) to allow the program to open the ``../jail/a.txt`` file, but not the ``../b.txt`` file.
+Now we want to use sandboxing (``seccomp``) to allow the program to open the ``../jail/a.txt`` file, but not the ``../b.txt`` file.
 
 Access the ``seccomp/`` subfolder. Inspect the ``exec.c`` file and see what it does and what calls should succeed or not. Compile it using ``make``. Run ``strace ./exec`` and see what calls are allowed and what calls are not allowed.
 
