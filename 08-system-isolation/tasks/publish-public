@@ -1,3 +1,0 @@
-#!/bin/bash
-
-scp -q 08-system-isolation.tar sis@elf.cs.pub.ro:res/current/
