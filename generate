@@ -35,12 +35,12 @@ cp -r "$tpl_session_path"/* "$session"
 
 # Generate actual files by replacing template statements using sed.
 IFS=$'\n'
-for task in "$session"/*; do
+for task in "$session"/challenges/*; do
     if test ! -d "$task"; then
         continue
     fi
     rm -f "$task"/.config
-    config="$tpl_session_path"/"$(basename "$task")"/.config
+    config="$tpl_session_path"/challenges/"$(basename "$task")"/.config
     find "$task" -type f | while IFS=$'\n' read f; do
         echo "file: $f, config: $config"
         if test -f "$config"; then
